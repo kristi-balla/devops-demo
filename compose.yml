@@ -1,0 +1,31 @@
+services:
+  # kics ignore-block
+  traefik:
+    image: traefik
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "8080:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    security_opt:
+      # we're mounting the docker socket, traefik will be OP either way
+      - apparmor:unconfined
+
+  # kics ignore-block
+  greetings:
+    container_name: greetings
+    build:
+      context: demo
+      dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.greeting.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.greeting.entrypoints=web"
+      - "traefik.http.middlewares.greeting-stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.greeting.middlewares=greeting-stripprefix"
+      - "traefik.http.services.greeting.loadbalancer.server.port=8080"
+    security_opt:
+      - no-new-privileges:true
