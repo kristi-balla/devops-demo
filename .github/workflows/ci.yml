@@ -9,6 +9,8 @@ jobs:
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   dockerfile_linting:
+    permissions:
+        pull-requests: write
     name: dockerfile_linting
     uses: ./.github/workflows/dockerfile-lint.yml
   k8s_linting:
