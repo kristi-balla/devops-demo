@@ -2,3 +2,7 @@ customword
 kics
 stackrox
 sarif
+burrunan
+jacoco
+madrapps
+checkmarx
