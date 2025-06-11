@@ -10,6 +10,7 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   dockerfile_linting:
     permissions:
+        contents: read
         pull-requests: write
     name: dockerfile_linting
     uses: ./.github/workflows/dockerfile-lint.yml
@@ -17,10 +18,12 @@ jobs:
     uses: ./.github/workflows/kube-linter.yml
   kics:
     permissions:
-      pull-requests: write
+        contents: read
+        pull-requests: write
     uses: ./.github/workflows/kics.yml
   java:
     permissions:
+        contents: read
         pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
