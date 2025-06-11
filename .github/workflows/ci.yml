@@ -13,6 +13,8 @@ jobs:
     uses: ./.github/workflows/dockerfile-lint.yml
   k8s_linting:
     uses: ./.github/workflows/kube-linter.yml
+  kics:
+    uses: ./.github/workflows/kics.yml
   java:
     name: java
     uses: ./.github/workflows/java.yml
