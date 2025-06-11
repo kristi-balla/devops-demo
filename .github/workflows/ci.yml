@@ -18,6 +18,7 @@ jobs:
     uses: ./.github/workflows/kube-linter.yml
   kics:
     permissions:
+        actions: read
         contents: read
         pull-requests: write
     uses: ./.github/workflows/kics.yml
