@@ -25,6 +25,14 @@ jobs:
           gradle-version: current
 
       - uses: burrunan/gradle-cache-action@v3
+        name: Check build.gradle
+        with:
+          arguments: lintGradle
+          build-root-directory: ${{ env.BUILD_ROOT }}
+          save-generated-gradle-jars: true
+          gradle-version: current
+
+      - uses: burrunan/gradle-cache-action@v3
         name: Test
         with:
           arguments: test
