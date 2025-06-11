@@ -14,12 +14,20 @@ jobs:
   k8s_linting:
     uses: ./.github/workflows/kube-linter.yml
   kics:
+    permissions:
+      pull-requests: write
     uses: ./.github/workflows/kics.yml
   java:
+    permissions:
+        pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
   docker:
+    permissions:
+      contents: read
+      packages: write
     needs:
+      - kics
       - dockerfile_linting
       - java
     uses: ./.github/workflows/docker.yml
