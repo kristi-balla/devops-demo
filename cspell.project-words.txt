@@ -6,3 +6,6 @@ burrunan
 jacoco
 madrapps
 checkmarx
+spotbugs
+snom
+springframework
