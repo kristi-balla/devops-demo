@@ -1,0 +1,51 @@
+name: image building and linting
+
+on:
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: kristi-balla/devops-demo
+
+jobs:
+  build-and-push:
+    runs-on: linux
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: demo
+          file: demo/Dockerfile
+          push: true
+          # do as i say, not as i do: latest will come back to haunt you
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Run Dockle
+        uses: erzz/dockle-action@v1
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          report-format: sarif
+          report-name: dockle-results
+          failure-threshold: fatal
+          exit-code: 1
+          dockle-version: 0.4.11
+          accept-extensions: pem
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: dockle-results.sarif

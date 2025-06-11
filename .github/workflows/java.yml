@@ -1,0 +1,59 @@
+name: java
+
+on:
+  workflow_call:
+
+env:
+    BUILD_ROOT: server
+
+jobs:
+  java:
+    runs-on: ubuntu-latest
+    permissions:
+        pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: burrunan/gradle-cache-action@v3
+        name: Check Java files
+        with:
+          arguments: check
+          build-root-directory: ${{ env.BUILD_ROOT }}
+          save-generated-gradle-jars: true
+          gradle-version: current
+
+      - uses: burrunan/gradle-cache-action@v3
+        name: Check build.gradle
+        with:
+          arguments: lintGradle
+          build-root-directory: ${{ env.BUILD_ROOT }}
+          save-generated-gradle-jars: true
+          gradle-version: current
+
+      - uses: burrunan/gradle-cache-action@v3
+        name: Test
+        with:
+          arguments: test
+          build-root-directory: ${{ env.BUILD_ROOT }}
+          save-generated-gradle-jars: true
+          gradle-version: current
+
+      - uses: burrunan/gradle-cache-action@v3
+        name: Generate Test Reports
+        with:
+          arguments: jacocoTestReport
+          build-root-directory: ${{ env.BUILD_ROOT }}
+          save-generated-gradle-jars: true
+          gradle-version: current
+
+      - name: Add coverage to PR
+        uses: madrapps/jacoco-report@v1.7.2
+        with:
+          paths: ${{ github.workspace }}/**/${{ env.BUILD_ROOT }}/**/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: JaCoCo Test Coverage Report
+          update-comment: true
+          comment-type: both
+          min-coverage-overall: 5
+          min-coverage-changed-files: 5

@@ -2,6 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'checkstyle'
+	id 'nebula.lint'
+	id 'com.github.spotbugs'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -23,8 +27,58 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	spotbugs 'com.github.spotbugs:spotbugs:4.8.6'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = "10.12.4"
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        sarif.required = true
+		html.required = true
+    }
+}
+
+gradleLint {
+	alwaysRun = false
+}
+
+// the only working workaround for the spotbugs plugin in multi-project builds
+def classLoader = plugins['com.github.spotbugs'].class.classLoader
+def SpotBugsTask = classLoader.findLoadedClass( 'com.github.spotbugs.snom.SpotBugsTask' )
+def SpotBugsEffort = classLoader.findLoadedClass( 'com.github.spotbugs.snom.Effort' )
+def SpotBugsConfidence = classLoader.findLoadedClass( 'com.github.spotbugs.snom.Confidence' )
+
+spotbugs {
+	effort = SpotBugsEffort.MORE
+    reportLevel = SpotBugsConfidence.HIGH
+	ignoreFailures = false
+    showProgress = false
+}
+
+spotbugsMain {
+    reports {
+        html {
+            required = true
+            outputLocation = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+        }
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+	reports {
+        xml.required = true
+        html.required = true
+    }
 }
