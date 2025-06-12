@@ -4,12 +4,13 @@ on:
   workflow_call:
 
 env:
-    BUILD_ROOT: server
+    BUILD_ROOT: demo
 
 jobs:
   java:
     runs-on: ubuntu-latest
     permissions:
+        contents: read
         pull-requests: write
 
     steps:

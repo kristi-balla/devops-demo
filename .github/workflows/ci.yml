@@ -9,15 +9,36 @@ jobs:
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   dockerfile_linting:
+    permissions:
+        contents: read
+        pull-requests: write
     name: dockerfile_linting
     uses: ./.github/workflows/dockerfile-lint.yml
   k8s_linting:
     uses: ./.github/workflows/kube-linter.yml
+  kics:
+    permissions:
+        security-events: write
+        actions: read
+        contents: read
+        pull-requests: write
+    uses: ./.github/workflows/kics.yml
   java:
+    permissions:
+        contents: read
+        pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
   docker:
+    permissions:
+      contents: read
+      packages: write
     needs:
+      - kics
       - dockerfile_linting
       - java
     uses: ./.github/workflows/docker.yml
+  dockle:
+    needs:
+      - docker
+    uses: ./.github/workflows/dockle.yml

@@ -9,7 +9,7 @@ env:
 
 jobs:
   build-and-push:
-    runs-on: linux
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -25,27 +25,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+        # this is here bc gh actions doesn't allow this outside a run block
+        # since the variable GITHUB_HEAD_REF isn't available on main, we have to set the default to that
+      - name: Fetch branch name
+        run: echo "IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${GITHUB_HEAD_REF:-main}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: demo
           file: demo/Dockerfile
           push: true
-          # do as i say, not as i do: latest will come back to haunt you
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: Run Dockle
-        uses: erzz/dockle-action@v1
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          report-format: sarif
-          report-name: dockle-results
-          failure-threshold: fatal
-          exit-code: 1
-          dockle-version: 0.4.11
-          accept-extensions: pem
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: dockle-results.sarif
+          tags: ${{ env.IMAGE }}
