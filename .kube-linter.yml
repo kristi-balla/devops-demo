@@ -1,0 +1,4 @@
+checks:
+  exclude:
+    # spring boot needs access at least to tmp, so we disable this check
+    - "no-read-only-root-fs"
