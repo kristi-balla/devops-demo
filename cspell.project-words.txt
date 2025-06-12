@@ -9,3 +9,7 @@ checkmarx
 spotbugs
 snom
 springframework
+Dockerfiles
+dockerfiles
+healthcheck
+distroless
