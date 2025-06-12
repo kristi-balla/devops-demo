@@ -1,6 +1,6 @@
 # kics-scan disable=fd54f200-402c-4333-a5a4-36ef6709af2f
 # disables alarms about the missing user instruction
-FROM gradle:8.14.1-jdk21 AS build
+FROM gradle:8.14.2-jdk21 AS build
 
 LABEL org.opencontainers.image.source=https://github.siemens.cloud/CCS/devops-demo
 LABEL org.opencontainers.image.description="A sample Docker image of a Spring Boot application using Gradle."
