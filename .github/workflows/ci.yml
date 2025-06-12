@@ -19,6 +19,12 @@ jobs:
       contents: read
       security-events: write
     uses: ./.github/workflows/kube-linter.yml
+  semgrep:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/sem-grep.yml
+  tflint:
+    uses: ./.github/workflows/tflint.yml
   kics:
     permissions:
         security-events: write

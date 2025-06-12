@@ -1,0 +1,19 @@
+name: semgrep free scan
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  semgrep:
+    name: semgrep-oss/scan
+    runs-on: ubuntu-latest
+
+    container:
+      image: semgrep/semgrep
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan --config auto
