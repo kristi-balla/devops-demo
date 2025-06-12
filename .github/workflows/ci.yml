@@ -22,7 +22,7 @@ jobs:
   semgrep:
     permissions:
       contents: read
-    uses: ./.github/workflows/semgrep.yml
+    uses: ./.github/workflows/sem-grep.yml
   tflint:
     uses: ./.github/workflows/tflint.yml
   kics:
