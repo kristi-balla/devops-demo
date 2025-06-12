@@ -29,3 +29,10 @@ Here is an exhaustive list of all workflows found here:
 - [**semgrep**](https://github.com/semgrep/semgrep): yet another static-analysis tool. Creating an account with the service opens the door to ✨ AI-enhanced  ✨ feedback, but the free oss version can catch some early errors as well.
 - **spelling**: because no project looks professional without proper spelling! Here, we use the [cspell](https://cspell.org/) and [typos](https://github.com/crate-ci/typos) actions.
 - [**tflint**](https://github.com/terraform-linters/tflint)
+
+## Open Points
+
+- [ ] trivy
+- [ ] adding an SBOM to the image and analyzing that
+- [ ] `npm audit` --> needs a *very basic* frontend
+- [ ] judge the sanity of all this
