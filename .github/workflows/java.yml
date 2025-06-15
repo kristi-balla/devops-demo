@@ -1,17 +1,20 @@
-name: java
+name: java linting, gradle linting, and jacoco coverage
 
 on:
   workflow_call:
 
 env:
-    BUILD_ROOT: demo
+  BUILD_ROOT: demo
 
 jobs:
   java:
     runs-on: ubuntu-latest
     permissions:
-        contents: read
-        pull-requests: write
+      # Can read the contents of the repository
+      contents: read
+      # Can write to the pull requests in the repository;
+      # We need this to add the JaCoCo coverage report to the PR
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4

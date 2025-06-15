@@ -1,8 +1,7 @@
 name: main
 
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
   pull_request:
 
 jobs:
@@ -10,10 +9,10 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   dockerfile_linting:
     permissions:
-        contents: read
-        pull-requests: write
+      contents: read
+      pull-requests: write
     name: dockerfile_linting
-    uses: ./.github/workflows/dockerfile-lint.yml
+    uses: ./.github/workflows/hadolint.yml
   k8s_linting:
     permissions:
       contents: read
@@ -23,19 +22,19 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/sem-grep.yml
-  tflint:
+  terraform_linting:
     uses: ./.github/workflows/tflint.yml
   kics:
     permissions:
-        security-events: write
-        actions: read
-        contents: read
-        pull-requests: write
+      security-events: write
+      actions: read
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/kics.yml
   java:
     permissions:
-        contents: read
-        pull-requests: write
+      contents: read
+      pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
   docker:
@@ -43,11 +42,10 @@ jobs:
       contents: read
       packages: write
     needs:
-      - kics
       - dockerfile_linting
       - java
+      - kics
     uses: ./.github/workflows/docker.yml
   dockle:
-    needs:
-      - docker
+    needs: [docker]
     uses: ./.github/workflows/dockle.yml

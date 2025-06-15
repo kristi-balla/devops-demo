@@ -1,13 +1,15 @@
-name: kube-linter
+name: k8s manifest linting using kube-linter
 
 on:
-    workflow_call:
+  workflow_call:
 
 jobs:
-  scan:
+  kube-linter:
     runs-on: ubuntu-latest
     permissions:
+      # Can read the contents of the repository.
       contents: read
+      # Allows the workflow to write security events, such as SARIF reports, to the repository.
       security-events: write
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +30,7 @@ jobs:
         with:
           sarif_file: kube-linter.sarif
 
-      # Ensure the workflow eventually fails if files did not pass kube-linter checks.
+      # Ensure the workflow eventually fails if files did NOT pass kube-linter checks.
       - name: Verify kube-linter-action succeeded
         shell: bash
         run: |
