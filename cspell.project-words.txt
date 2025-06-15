@@ -16,6 +16,7 @@ jacoco
 kics
 kristi
 madrapps
+renovatebot
 sarif
 semgrep
 snom
