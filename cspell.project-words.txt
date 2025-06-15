@@ -3,6 +3,7 @@ buildx
 Buildx
 burrunan
 checkmarx
+CODEOWNERS
 customword
 distroless
 dists
@@ -16,6 +17,7 @@ jacoco
 kics
 kristi
 madrapps
+memoriae
 renovatebot
 sarif
 semgrep
