@@ -1,7 +1,5 @@
 # devops-demo
 
-⚠️⚠️ **TODO**: do not forget to check the codebase for occurrences of my own name when done!
-
 ## Server
 
 This project consists of a very simple Spring Boot Hello-World application. The project itself is located in the `demo` folder. It only exposes the endpoint `/greet` on port `8080` with an optional query parameter called `name`, i.e.,
@@ -35,4 +33,8 @@ Here is an exhaustive list of all workflows you can find in the `.github/workflo
 - [ ] trivy
 - [ ] adding an SBOM to the image and analyzing that
 - [ ] `npm audit` --> needs a *very basic* frontend
+- [ ] gitleaks as credential scanning tool
+- [ ] Add `CODEOWNERS`, and explain how it works
 - [ ] judge the sanity of all this
+- [ ] Pinning the versions of the actions used in the workflows to SHA hashes instead of versions to avoid unexpected changes in the future
+- [ ] Damnation memoriae: remove kristi at the end, rewrite history
