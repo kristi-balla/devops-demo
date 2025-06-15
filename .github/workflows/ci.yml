@@ -41,11 +41,12 @@ jobs:
       packages: write
     needs:
       - dockerfile_linting
-      - java
-      - kics
+      - java_linting
+      - sast_1
+      - sast_2
     uses: ./.github/workflows/docker.yml
   container_image_linting:
-    needs: [docker]
+    needs: [deploy]
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
