@@ -46,7 +46,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-              - ALL
+                - ALL
 ---
 apiVersion: v1
 kind: Service
