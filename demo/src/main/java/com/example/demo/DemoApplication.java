@@ -3,7 +3,7 @@
  *
  * Licensed under the Siemens Inner Source License 1.5
  *
- * Authors: Kristi Balla, Patrick Stöckle
+ * Authors: Kristi Balla
  *
  * SPDX-FileCopyrightText: 2025 Siemens
  *
