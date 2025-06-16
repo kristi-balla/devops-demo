@@ -27,6 +27,7 @@ nbproject
 nbbuild
 nbdist
 nonroot
+opencontainers
 renovatebot
 sarif
 semgrep
