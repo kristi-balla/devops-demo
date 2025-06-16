@@ -2,13 +2,16 @@
 services:
   greetings:
     container_name: greetings
+    ports:
+      - "8080:8080"
     build:
       context: demo
       dockerfile: Dockerfile
     security_opt:
       - no-new-privileges=true
     healthcheck:
-      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/greet"]
+      test:
+        ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/greet"]
       interval: 30s
       timeout: 10s
       retries: 5

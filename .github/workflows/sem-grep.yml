@@ -1,4 +1,4 @@
-name: semgrep free scan
+name: static security scanning using semgrep
 
 on:
   workflow_call:

@@ -1,4 +1,4 @@
-name: image linting
+name: container image linting
 
 on:
   workflow_call:

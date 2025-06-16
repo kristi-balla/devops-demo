@@ -1,8 +1,7 @@
-name: main
+name: devops demo CI parent workflow
 
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
   pull_request:
 
 jobs:
@@ -14,48 +13,48 @@ jobs:
       pull-requests: write
     name: gitleaks
     uses: ./.github/workflows/gitleaks.yml
-  spellcheck:
-    uses: ./.github/workflows/spelling.yml
+  java_linting:
+    permissions:
+      contents: read
+      pull-requests: write
+    name: java
+    uses: ./.github/workflows/java.yml
   dockerfile_linting:
     permissions:
-        contents: read
-        pull-requests: write
+      contents: read
+      pull-requests: write
     name: dockerfile_linting
-    uses: ./.github/workflows/dockerfile-lint.yml
+    uses: ./.github/workflows/hadolint.yml
+  terraform_linting:
+    uses: ./.github/workflows/tflint.yml
   k8s_linting:
     permissions:
       contents: read
       security-events: write
     uses: ./.github/workflows/kube-linter.yml
-  semgrep:
+  sast_1:
     permissions:
       contents: read
     uses: ./.github/workflows/sem-grep.yml
-  tflint:
-    uses: ./.github/workflows/tflint.yml
-  kics:
+  sast_2:
     permissions:
-        security-events: write
-        actions: read
-        contents: read
-        pull-requests: write
+      security-events: write
+      actions: read
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/kics.yml
-  java:
-    permissions:
-        contents: read
-        pull-requests: write
-    name: java
-    uses: ./.github/workflows/java.yml
-  docker:
+  deploy:
     permissions:
       contents: read
       packages: write
     needs:
-      - kics
       - dockerfile_linting
-      - java
+      - java_linting
+      - sast_1
+      - sast_2
     uses: ./.github/workflows/docker.yml
-  dockle:
-    needs:
-      - docker
+  container_image_linting:
+    needs: [deploy]
     uses: ./.github/workflows/dockle.yml
+  spellcheck:
+    uses: ./.github/workflows/spelling.yml

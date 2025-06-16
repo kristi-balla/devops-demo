@@ -1,4 +1,4 @@
-name: KICS
+name: security linting using kics
 
 on:
   workflow_call:
@@ -7,10 +7,10 @@ jobs:
   kics:
     runs-on: ubuntu-latest
     permissions:
-        security-events: write
-        actions: read
-        contents: read
-        pull-requests: write
+      security-events: write
+      actions: read
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -18,12 +18,12 @@ jobs:
         uses: checkmarx/kics-github-action@v2.1.10
         id: kics-action-scan
         with:
-            path: ${{ github.workspace }}
-            fail_on: critical,high,medium
-            output_path: ${{ github.workspace }}
-            token: ${{ github.token }}
-            enable_comments: true
-            output_formats: 'sarif'
+          path: ${{ github.workspace }}
+          fail_on: critical,high,medium
+          output_path: ${{ github.workspace }}
+          token: ${{ github.token }}
+          enable_comments: true
+          output_formats: "sarif"
         continue-on-error: true
 
       - name: Upload SARIF report files to GitHub
