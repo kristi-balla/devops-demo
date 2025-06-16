@@ -15,7 +15,7 @@ RUN gradle dependencies --no-daemon
 COPY src ./src
 RUN gradle build --no-daemon -x test
 
-FROM gcr.io/distroless/java21-debian12:debug@sha256:a8b28650b068a2386776008444cdb5825a2d0b00f070ec5811d7340523985448
+FROM gcr.io/distroless/java21-debian12:debug@sha256:6cfdc2df2fb75fc495985cc3c2cddd93ad45e050ae4ac629c549649c612877bb
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
