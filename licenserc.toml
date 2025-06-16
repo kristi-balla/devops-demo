@@ -1,0 +1,78 @@
+# Copyright © Siemens none - none
+#
+# Licensed under the Siemens Inner Source License 1.5
+#
+# Authors: 
+#
+# SPDX-FileCopyrightText: none Siemens
+#
+# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+
+# REUSE-IgnoreStart
+inlineHeader = """
+Copyright © {{ props.copyrightOwner }} {{ attrs.git_file_created_year }} - {{ attrs.git_file_modified_year }}
+
+Licensed under the Siemens Inner Source License {{ props.sislVersion }}
+
+Authors: {{ attrs.git_authors | join(", ") }}
+
+SPDX-FileCopyrightText: {{ attrs.git_file_created_year }} {{ props.copyrightOwner }}
+
+SPDX-License-Identifier: LicenseRef-Siemens-ISL-{{ props.sislVersion }}
+"""
+# REUSE-IgnoreEnd
+
+# You can exclude files and folders
+excludes = [
+    ".flake8",
+    ".git/*",
+    ".gitkeep",
+    ".vscode/*",
+    "*.ico",
+    "*.j2",
+    "*.json",
+    "*.json5",
+    "*.jsonc",
+    "*.lock",
+    "*.png",
+    "*.pub",
+    "*.txt",
+    "*.jar",
+    "*harden.bash*",
+    "COPYING.md",
+    "CHANGELOG.md",
+    "css/pointer-0.1.4.min.css",
+    "LICENSE.md",
+    "LICENSES/*",
+    "Makefile",
+    "node_modules/*",
+    "plugins/*",
+    "theme/*",
+    ".gradle/*",
+    "build/*",
+    "gradlew",
+    "gradlew.bat",
+    "gradle/*"
+]
+
+additionalHeaders = ["licenseheaders.toml"]
+useDefaultExcludes = false
+
+[mapping.NEW_SCRIPT]
+extensions = ["dockerignore", "gitignore", "gitattributes"]
+
+[mapping.JINJA]
+extensions = ["jinja"]
+
+[mapping.MARKDOWN]
+extensions = ["md"]
+
+# Define variables for your file header
+[properties]
+copyrightOwner = "Siemens"
+sislVersion = "1.5"
+
+# Activate git features to detect when a file has been changed
+[git]
+ignore = 'auto'
+attrs = 'enable'
