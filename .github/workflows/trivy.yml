@@ -42,7 +42,7 @@ jobs:
         env:
           SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
         run: |
-          cosign attach sbom --sbom ${SBOM_FILE} ${IMAGE}
+          cosign attest --type spdx --predicate ${SBOM_FILE} ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
         uses: actions/upload-artifact@v4
