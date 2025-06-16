@@ -51,3 +51,7 @@ jobs:
     needs:
       - docker
     uses: ./.github/workflows/dockle.yml
+  trivy:
+    needs:
+      - docker
+    uses: ./.github/workflows/trivy.yml

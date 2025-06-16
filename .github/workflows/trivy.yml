@@ -1,0 +1,29 @@
+name: container image vulnerability scanning and SBOM creation
+
+on:
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: kristi-balla/devops-demo
+
+jobs:
+  scan-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasec/trivy-action@v0.31.0
+        with:
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          format: 'spdx'
+          output: 'trivy-report.spdx'
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ github.token }}
+      
+      - name: Upload Trivy SBOM as Github artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-sbom-report
+          path: ${{ github.workspace }}/trivy-report.spdx
