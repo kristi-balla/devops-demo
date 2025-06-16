@@ -73,3 +73,5 @@ jobs:
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
+  npm-audit:
+    uses: ./.github/workflows/npm-audit.yml
