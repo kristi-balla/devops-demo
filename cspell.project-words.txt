@@ -18,6 +18,8 @@ kics
 kristi
 madrapps
 memoriae
+nonroot
+opencontainers
 renovatebot
 sarif
 semgrep
