@@ -52,5 +52,5 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   trivy:
     needs:
-      - docker
+      - deploy
     uses: ./.github/workflows/trivy.yml
