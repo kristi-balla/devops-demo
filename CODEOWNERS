@@ -1,9 +1,9 @@
 
 # ci
-.github @kristi-balla
+.github/ @kristi-balla
 
 # java backend
-demo @kristi-balla
+demo/ @kristi-balla
 
 # k8s
-manifests @kristi-balla
+manifests/ @kristi-balla
