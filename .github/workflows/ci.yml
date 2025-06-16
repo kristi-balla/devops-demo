@@ -5,6 +5,14 @@ on:
   pull_request:
 
 jobs:
+  gitleaks:
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      pull-requests: write
+    name: gitleaks
+    uses: ./.github/workflows/gitleaks.yml
   java_linting:
     permissions:
       contents: read
