@@ -1,3 +1,13 @@
+# Copyright © Siemens 2025 - 2025
+#
+# Licensed under the Siemens Inner Source License 1.5
+#
+# Authors: Kristi Balla, Patrick Stöckle, renovate[bot]
+#
+# SPDX-FileCopyrightText: 2025 Siemens
+#
+# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+
 # kics-scan disable=fd54f200-402c-4333-a5a4-36ef6709af2f
 # disables alarms about the missing user instruction
 FROM gradle:8.14.2-jdk21 AS build
