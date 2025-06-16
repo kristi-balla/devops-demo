@@ -39,11 +39,11 @@ jobs:
     permissions:
       contents: read
       packages: write
-    # needs:
-    #   - dockerfile_linting
-    #   - java_linting
-    #   - sast_1
-    #   - sast_2
+    needs:
+      - dockerfile_linting
+      - java_linting
+      - sast_1
+      - sast_2
     uses: ./.github/workflows/docker.yml
   container_image_linting:
     needs: [deploy]
