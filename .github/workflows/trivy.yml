@@ -41,8 +41,11 @@ jobs:
       - name: Attach SBOM to Container Image
         env:
           SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
+        # Change command to 
+        # cosign attest --type spdx --predicate ${SBOM_FILE} ${IMAGE}
+        # for a signed attestation
         run: |
-          cosign attest --type spdx --predicate ${SBOM_FILE} ${IMAGE}
+          cosign attach sbom --sbom ${SBOM_FILE} ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
         uses: actions/upload-artifact@v4
