@@ -51,6 +51,8 @@ jobs:
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   trivy:
+    permissions:
+      packages: write
     needs:
       - deploy
     uses: ./.github/workflows/trivy.yml

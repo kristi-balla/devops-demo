@@ -10,6 +10,8 @@ env:
 jobs:
   scan-image:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
 
     steps:
       - name: Create image name
