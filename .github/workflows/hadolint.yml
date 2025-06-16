@@ -1,4 +1,4 @@
-name: hadolint
+name: dockerfile linting using hadolint
 
 on:
   workflow_call:

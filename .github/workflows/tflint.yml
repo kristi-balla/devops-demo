@@ -1,4 +1,4 @@
-name: tflint
+name: terraform linting using tflint
 
 on:
   workflow_call:
@@ -8,18 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      name: Checkout source code
+      - uses: actions/checkout@v4
+        name: Checkout source code
 
-    - uses: terraform-linters/setup-tflint@v4
-      name: Setup TFLint
-      with:
-        tflint_version: v0.52.0
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup tflint
+        with:
+          tflint_version: v0.52.0
 
-    - name: Init TFLint
-      run: tflint --init
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      - name: Init tflint
+        run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Run TFLint
-      run: tflint -f compact
+      - name: Run tflint
+        run: tflint -f compact
