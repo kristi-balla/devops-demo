@@ -13,7 +13,7 @@ The app is containerized and can also be run as a compose application. What is m
 
 ## CI/CD
 
-We use reusable workflows used for this project. Each workflow starts at a `base` CI file, i.e., [`ci.yml`](./.github/workflows/ci.yml), which references the rest. It is important to note that **both** the parent and the child workflow can define permissions. Using permissions in the child and parent workflow, we want to demonstrate that the child workflow can set less/fewer permissions than the parent, and proceed with them.
+We use reusable workflows for this project. Each workflow starts at a `base` CI file, i.e., [`ci.yml`](./.github/workflows/ci.yml), which references the rest. It is important to note that **both** the parent and the child workflow can define permissions. Using permissions in the child and parent workflow, we want to demonstrate that the child workflow can set less/fewer permissions than the parent, and proceed with them.
 
 Here is an exhaustive list of all workflows you can find in the `.github/workflows` folder:
 
