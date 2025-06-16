@@ -1,0 +1,17 @@
+on:
+    workflow_call:
+
+jobs:
+    hawkeye:
+        name: hawkeye
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Run Hawkeye
+              uses: korandoru/hawkeye@v6
+              with:
+                github_token: ${{ github.token }}
