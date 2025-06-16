@@ -45,9 +45,5 @@ Here is an exhaustive list of all workflows you can find in the `.github/workflo
 - [ ] trivy
 - [ ] adding an SBOM to the image and analyzing that
 - [ ] `npm audit` --> needs a *very basic* frontend
-- [ ] gitleaks as credential scanning tool
-- [ ] Add `CODEOWNERS`, and explain how it works
-- [ ] judge the sanity of all this
 - [ ] Pinning the versions of the actions used in the workflows to SHA hashes instead of versions to avoid unexpected changes in the future
-- [ ] Use `hawkeye` to add license headers
 - [ ] Damnation memoriae: remove kristi at the end, rewrite history
