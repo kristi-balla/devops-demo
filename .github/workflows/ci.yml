@@ -77,4 +77,4 @@ jobs:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
     needs:
       - deploy
-    uses: ./.github/workflows/trivy.yml
+    uses: ./.github/workflows/build-container/trivy.yml
