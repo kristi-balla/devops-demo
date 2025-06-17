@@ -26,6 +26,11 @@ on:
         description: The name of the image to build and push
         required: true
         type: string
+      ignore-codes:
+        description: Comma-separated list of codes to ignore
+        required: false
+        type: string
+        default: ""
 
 jobs:
   image-scanning:
@@ -52,3 +57,4 @@ jobs:
           exit-code: 1
           dockle-version: 0.4.11
           accept-extensions: pem
+          ignore-codes: ${{ inputs.ignore-codes }}

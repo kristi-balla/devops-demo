@@ -19,6 +19,10 @@ on:
       image-tag:
         required: true
         type: string
+      ignore-codes:
+        required: false
+        type: string
+        default: ""
     secrets:
       cosign-key:
         required: true
@@ -52,6 +56,7 @@ jobs:
       image-registry: ${{ inputs.image-registry }}
       image-name: ${{ inputs.image-name }}
       image-digest: ${{ needs.docker.outputs.image-digest }}
+      ignore-codes: ${{ inputs.ignore-codes }}
   trivy:
     uses: ./.github/workflows/trivy.yml
     needs:
