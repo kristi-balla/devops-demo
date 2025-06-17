@@ -79,5 +79,3 @@ jobs:
       packages: write
     secrets:
       cosign-key: ${{ secrets.cosign-key }}
-
-    

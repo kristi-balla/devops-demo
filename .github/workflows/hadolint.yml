@@ -12,7 +12,7 @@ name: dockerfile linting using hadolint
 
 on:
   workflow_call:
-    inputs: 
+    inputs:
       dockerfile:
         required: true
         type: string

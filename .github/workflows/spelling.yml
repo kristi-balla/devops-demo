@@ -23,7 +23,7 @@ jobs:
       - name: Documentation Spell Check
         uses: streetsidesoftware/cspell-action@69543c3f9f14d4fcc6004c7bee03c4d366f11d64
         with:
-          config: './cspell.config.yml'
+          config: "./cspell.config.yml"
 
       - name: Code Spell Check
         uses: crate-ci/typos@b1ae8d918b6e85bd611117d3d9a3be4f903ee5e4

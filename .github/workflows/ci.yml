@@ -58,7 +58,7 @@ jobs:
     uses: ./.github/workflows/npm-audit.yml
   build-java-container:
     uses: ./.github/workflows/build-container.yml
-    with: 
+    with:
       context: ./demo
       dockerfile: ./demo/Dockerfile
       image-registry: ghcr.io
@@ -71,7 +71,7 @@ jobs:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
   build-js-container:
     uses: ./.github/workflows/build-container.yml
-    with: 
+    with:
       context: ./ui
       dockerfile: ./ui/Dockerfile
       image-registry: ghcr.io

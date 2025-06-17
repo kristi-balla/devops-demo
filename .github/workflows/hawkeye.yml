@@ -24,4 +24,4 @@ jobs:
             - name: Run Hawkeye
               uses: korandoru/hawkeye@cdc68d9c8ace500aefcd8f4dd39b915cd06305dd
               with:
-                github_token: ${{ github.token }}
+                  github_token: ${{ github.token }}
