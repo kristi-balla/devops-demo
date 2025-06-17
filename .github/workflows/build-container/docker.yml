@@ -72,7 +72,7 @@ jobs:
         id: docker_build
         with:
           context: "${{ inputs.context }}"
-          file: "${{ inputs.context }}/${{ inputs.dockerfile }}"
+          file: "${{ inputs.dockerfile }}"
           push: true
           tags: ${{ inputs.image-registry }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
           labels: |
