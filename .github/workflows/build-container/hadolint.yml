@@ -12,6 +12,10 @@ name: dockerfile linting using hadolint
 
 on:
   workflow_call:
+    inputs: 
+      dockerfile:
+        required: true
+        type: string
 
 jobs:
   hadolint:
@@ -19,9 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Lint Dockerfiles
-        id: lint-dockerfiles
+      - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: "*Dockerfile"
-          recursive: true
+          dockerfile: ${{ inputs.dockerfile }}
