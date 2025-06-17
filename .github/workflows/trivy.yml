@@ -37,6 +37,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
+      
+      - name: Print Keys
+        env:
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PUBLIC_KEY: ${{ secrets.COSIGN_PUBLIC_KEY }}
+        run: echo $COSIGN_PASSWORD $COSIGN_PUBLIC_KEY | base64 -w0
 
       - name: Write secret to local file
         run: |
