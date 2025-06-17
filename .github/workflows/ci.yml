@@ -73,7 +73,8 @@ jobs:
   trivy:
     permissions:
       packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
     needs:
       - deploy
     uses: ./.github/workflows/trivy.yml
-    secrets: inherit

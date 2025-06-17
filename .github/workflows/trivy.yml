@@ -2,6 +2,9 @@ name: container image vulnerability scanning and SBOM creation
 
 on:
   workflow_call:
+    secrets:
+      cosign-key:
+        required: true
 
 env:
   REGISTRY: ghcr.io
@@ -37,35 +40,14 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
-
-      - name: Check if secret exists and has content
-        run: |
-          if [ -z "${{ secrets.COSIGN_PUBLIC_KEY }}" ]; then
-            echo "Secret is empty or not set"
-          else
-            echo "Secret exists and has content (length: ${SECRET_VALUE})"
-          fi
-        env:
-          SECRET_VALUE: ${{ secrets.COSIGN_PUBLIC_KEY }}
       
-      - name: Print Keys
-        env:
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-          COSIGN_PUBLIC_KEY: ${{ secrets.COSIGN_PUBLIC_KEY }}
-        run: echo $COSIGN_PASSWORD $COSIGN_PUBLIC_KEY | base64 -w0
-
-      - name: Write secret to local file
-        run: |
-          echo "${{ secrets.COSIGN_PRIVATE_KEY }}" | base64 -d > cosign.key
-          chmod 600 cosign.key
-
       - name: Attach SBOM to Container Image
         env:
           SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.cosign-key }}
+          COSIGN_PASSWORD: ""
         run: |
-          cosign attest --type spdx --predicate ${SBOM_FILE} --key cosign.key ${IMAGE}
+          cosign attest --type spdx --predicate ${SBOM_FILE} --key env://COSIGN_PRIVATE_KEY --yes ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
         uses: actions/upload-artifact@v4
