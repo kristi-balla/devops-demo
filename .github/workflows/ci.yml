@@ -62,7 +62,20 @@ jobs:
       context: ./demo
       dockerfile: ./demo/Dockerfile
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo
+      image-name: kristi-balla/devops-demo/java
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+    permissions:
+      contents: read
+      packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+  build-js-container:
+    uses: ./.github/workflows/build-container.yml
+    with: 
+      context: ./ui
+      dockerfile: ./ui/Dockerfile
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/ui
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     permissions:
       contents: read
