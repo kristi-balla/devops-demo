@@ -2,7 +2,7 @@
 #
 # Licensed under the Siemens Inner Source License 1.5
 #
-# Authors: Kristi Balla, Patrick Stöckle
+# Authors: Kristi Balla, Patrick Stöckle, Tesch, Jan (FT RPD CST SEA-DE)
 #
 # SPDX-FileCopyrightText: 2025 Siemens
 #
@@ -73,3 +73,5 @@ jobs:
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
+  npm-audit:
+    uses: ./.github/workflows/npm-audit.yml

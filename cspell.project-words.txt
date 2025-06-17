@@ -20,6 +20,7 @@ jacoco
 kics
 korandoru
 kristi
+libpeerconnection
 licenseheaders
 madrapps
 memoriae
@@ -37,4 +38,7 @@ spotbugs
 springframework
 stackrox
 Stöckle
+testem
+Tesch
+tesch
 tflint

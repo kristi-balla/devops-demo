@@ -26,3 +26,19 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+  ui:
+    container_name: ui
+    ports:
+      - "9090:80"
+    build:
+      context: ui
+      dockerfile: Dockerfile
+    security_opt:
+      - no-new-privileges=true
+    healthcheck:
+      test:
+        ["CMD", "wget", "--spider", "--quiet", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
