@@ -61,6 +61,8 @@ jobs:
     needs:
       - java_linting
     with: 
+      context: ./demo
+      dockerfile: ./demo/Dockerfile
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
