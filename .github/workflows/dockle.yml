@@ -28,7 +28,7 @@ on:
         type: string
 
 jobs:
-  build-and-push:
+  image-scanning:
     runs-on: ubuntu-latest
 
     steps:
