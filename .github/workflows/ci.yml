@@ -62,16 +62,19 @@ jobs:
     permissions:
       contents: read
       packages: write
-    needs:
-      - dockerfile_linting
-      - java_linting
-      - sast_1
-      - sast_2
     uses: ./.github/workflows/docker.yml
   container_image_linting:
-    needs: [deploy]
+    needs: [deploy]   
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
+  trivy:
+    permissions:
+      packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+    needs:
+      - deploy
+    uses: ./.github/workflows/trivy.yml

@@ -1,0 +1,58 @@
+name: container image vulnerability scanning and SBOM creation
+
+on:
+  workflow_call:
+    secrets:
+      cosign-key:
+        required: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: kristi-balla/devops-demo
+
+jobs:
+  scan-image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    steps:
+      - name: Create image name
+        run: |
+          echo "IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${GITHUB_HEAD_REF:-main}" >> $GITHUB_ENV
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.31.0
+        with:
+          image-ref: ${{ env.IMAGE }}
+          format: 'spdx'
+          output: 'trivy-report.spdx'
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ github.token }}
+      
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+      
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      
+      - name: Attach SBOM to Container Image
+        env:
+          SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
+          COSIGN_PRIVATE_KEY: ${{ secrets.cosign-key }}
+          COSIGN_KEY_FILE: ${{ github.workspace }}/cosign-private.key
+        # Passing the env with env://COSIGN_PRIVATE_KEY does not work because the format is not PEM conformant
+        run: |
+          echo "${COSIGN_PRIVATE_KEY}" > $COSIGN_KEY_FILE
+          cosign attest --type spdx --predicate ${SBOM_FILE} --key $COSIGN_KEY_FILE --yes ${IMAGE}
+      
+      - name: Upload Trivy SBOM as Github artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-sbom-report
+          path: ${{ github.workspace }}/trivy-report.spdx
