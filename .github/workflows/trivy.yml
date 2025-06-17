@@ -37,6 +37,16 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
+
+      - name: Check if secret exists and has content
+        run: |
+          if [ -z "${{ secrets.COSIGN_PUBLIC_KEY }}" ]; then
+            echo "Secret is empty or not set"
+          else
+            echo "Secret exists and has content (length: ${SECRET_VALUE})"
+          fi
+        env:
+          SECRET_VALUE: ${{ secrets.YOUR_SECRET_NAME }}
       
       - name: Print Keys
         env:
@@ -46,7 +56,7 @@ jobs:
 
       - name: Write secret to local file
         run: |
-          echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
+          echo "${{ secrets.COSIGN_PRIVATE_KEY }}" | base64 -d > cosign.key
           chmod 600 cosign.key
 
       - name: Attach SBOM to Container Image

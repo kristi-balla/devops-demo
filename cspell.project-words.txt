@@ -1,5 +1,6 @@
 aquasecurity
 balla
+binutils
 buildx
 Buildx
 burrunan
@@ -7,6 +8,7 @@ checkmarx
 CODEOWNERS
 ctxt
 customword
+demangle
 distroless
 dists
 dockerfiles
@@ -22,6 +24,8 @@ kics
 korandoru
 kristi
 libpeerconnection
+libiberty
+libc
 licenseheaders
 madrapps
 memoriae
@@ -33,6 +37,7 @@ opencontainers
 renovatebot
 sarif
 semgrep
+setuid
 sigstore
 sisl
 snom
