@@ -1,8 +1,20 @@
+/*
+ * Copyright © Siemens 2025 - 2025
+ *
+ * Licensed under the Siemens Inner Source License 1.5
+ *
+ * Authors: Kristi Balla, renovate[bot]
+ *
+ * SPDX-FileCopyrightText: 2025 Siemens
+ *
+ * SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+ */
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.0'
 	id 'io.spring.dependency-management' version '1.1.7'
-	id 'nebula.lint' version '20.6.1'
+	id 'nebula.lint' version '20.6.2'
 	id 'com.github.spotbugs' version '6.2.0'
 	id 'jacoco'
 }

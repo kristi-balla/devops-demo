@@ -1,3 +1,13 @@
+# Copyright © Siemens 2025 - 2025
+#
+# Licensed under the Siemens Inner Source License 1.5
+#
+# Authors: Kristi Balla
+#
+# SPDX-FileCopyrightText: 2025 Siemens
+#
+# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+
 # Compiled class file
 *.class
 
@@ -22,3 +32,5 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+.gradle/*

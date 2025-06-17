@@ -1,0 +1,13 @@
+
+# ci
+.github/ @kristi-balla
+
+# java backend
+demo/ @kristi-balla
+
+# k8s
+manifests/ @kristi-balla
+
+# ui
+
+ui/ @jan-tesch

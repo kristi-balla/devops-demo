@@ -2,34 +2,31 @@
 #
 # Licensed under the Siemens Inner Source License 1.5
 #
-# Authors: Kristi Balla, Patrick Stöckle
+# Authors: Kristi Balla
 #
 # SPDX-FileCopyrightText: 2025 Siemens
 #
 # SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
 
-name: terraform linting using tflint
-
+name: gitleaks
 on:
   workflow_call:
 
 jobs:
-  tflint:
+  gitleaks:
+    name: gitleaks
     runs-on: ubuntu-latest
+    permissions:
+        security-events: write
+        actions: read
+        contents: read
+        pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
-        name: Checkout source code
-
-      - uses: terraform-linters/setup-tflint@v4
-        name: Setup tflint
         with:
-          tflint_version: v0.52.0
+          fetch-depth: 0
 
-      - name: Init tflint
-        run: tflint --init
+      - uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Run tflint
-        run: tflint -f compact

@@ -1,3 +1,13 @@
+# Copyright © Siemens 2025 - 2025
+#
+# Licensed under the Siemens Inner Source License 1.5
+#
+# Authors: Kristi Balla, Patrick Stöckle, Tesch, Jan (FT RPD CST SEA-DE)
+#
+# SPDX-FileCopyrightText: 2025 Siemens
+#
+# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+
 name: devops demo CI parent workflow
 
 on:
@@ -5,6 +15,19 @@ on:
   pull_request:
 
 jobs:
+  hawkeye:
+    permissions:
+      contents: read
+    name: hawkeye
+    uses: ./.github/workflows/hawkeye.yml
+  gitleaks:
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      pull-requests: write
+    name: gitleaks
+    uses: ./.github/workflows/gitleaks.yml
   java_linting:
     permissions:
       contents: read
@@ -50,6 +73,8 @@ jobs:
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
+  npm-audit:
+    uses: ./.github/workflows/npm-audit.yml
   trivy:
     permissions:
       packages: write

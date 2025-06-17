@@ -1,3 +1,15 @@
+<!--
+Copyright © Siemens 2025 - 2025
+
+Licensed under the Siemens Inner Source License 1.5
+
+Authors: Kristi Balla, Patrick Stöckle
+
+SPDX-FileCopyrightText: 2025 Siemens
+
+SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+-->
+
 # devops-demo
 
 ## Server
@@ -33,9 +45,5 @@ Here is an exhaustive list of all workflows you can find in the `.github/workflo
 - [ ] trivy
 - [ ] adding an SBOM to the image and analyzing that
 - [ ] `npm audit` --> needs a *very basic* frontend
-- [ ] gitleaks as credential scanning tool
-- [ ] Add `CODEOWNERS`, and explain how it works
-- [ ] judge the sanity of all this
 - [ ] Pinning the versions of the actions used in the workflows to SHA hashes instead of versions to avoid unexpected changes in the future
-- [ ] Use `hawkeye` to add license headers
 - [ ] Damnation memoriae: remove kristi at the end, rewrite history
