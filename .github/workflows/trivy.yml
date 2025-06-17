@@ -45,9 +45,11 @@ jobs:
         env:
           SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
           COSIGN_PRIVATE_KEY: ${{ secrets.cosign-key }}
+          COSIGN_KEY_FILE: ${{ github.workspace }}/cosign-private.key
+        # Passing the env with env://COSIGN_PRIVATE_KEY does not work because the format is not PEM conformant
         run: |
-          PRIVATE_KEY=$(echo ${COSIGN_PRIVATE_KEY}) \
-          cosign attest --type spdx --predicate ${SBOM_FILE} --key env://PRIVATE_KEY --yes ${IMAGE}
+          echo "${COSIGN_PRIVATE_KEY}" > $COSIGN_KEY_FILE
+          cosign attest --type spdx --predicate ${SBOM_FILE} --key $COSIGN_KEY_FILE --yes ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
         uses: actions/upload-artifact@v4
