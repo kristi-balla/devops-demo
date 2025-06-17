@@ -12,6 +12,11 @@ name: container image linting
 
 on:
   workflow_call:
+    inputs:
+      image-digest:
+        description: The digest of the built image
+        required: true
+        type: string
 
 env:
   REGISTRY: ghcr.io
@@ -35,7 +40,7 @@ jobs:
       - name: Run Dockle
         uses: erzz/dockle-action@v1
         with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          image: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ inputs.image-digest }}"
           report-format: sarif
           report-name: dockle-results
           failure-threshold: fatal
