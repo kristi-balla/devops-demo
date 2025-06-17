@@ -19,6 +19,9 @@ on:
       image-tag:
         required: true
         type: string
+    secrets:
+      cosign-key:
+        required: true
 
 jobs:
   hadolint:
