@@ -17,10 +17,15 @@ on:
         description: The digest of the built image
         required: true
         type: string
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: kristi-balla/devops-demo
+      image-registry:
+        description: The container registry to push the image to
+        required: false
+        type: string
+        default: ghcr.io
+      image-name:
+        description: The name of the image to build and push
+        required: true
+        type: string
 
 jobs:
   build-and-push:
@@ -33,14 +38,14 @@ jobs:
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ inputs.image-registry }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Run Dockle
         uses: erzz/dockle-action@v1
         with:
-          image: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ inputs.image-digest }}"
+          image: "${{ inputs.image-registry }}/${{ inputs.image-name }}@${{ inputs.image-digest }}"
           report-format: sarif
           report-name: dockle-results
           failure-threshold: fatal

@@ -12,14 +12,28 @@ name: container image building
 
 on:
   workflow_call:
+    inputs:
+      image-registry:
+        description: The container registry to push the image to
+        required: false
+        type: string
+        default: ghcr.io
+      image-name:
+        description: The name of the image to build and push
+        required: true
+        type: string
+      context:
+        description: The build context for the Docker image
+        required: true
+        type: string
+      dockerfile:
+        description: The path to the Dockerfile
+        required: true
+        type: string
     outputs:
       image-digest:
         description: The digest of the built image
         value: ${{ jobs.build-and-push.outputs.image-digest }}
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: kristi-balla/devops-demo
 
 jobs:
   build-and-push:
@@ -40,7 +54,7 @@ jobs:
       - name: Login to GHCR
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ inputs.image-registry }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
@@ -52,14 +66,14 @@ jobs:
         # This is a small helper, because GitHub Actions don't allow this outside a run block.
         # Since the variable GITHUB_HEAD_REF isn't available on main, we have to set the default to that
       - name: Fetch branch name
-        run: echo "IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${GITHUB_HEAD_REF:-main}" >> $GITHUB_ENV
+        run: echo "IMAGE=${{ inputs.image-registry }}/${{ inputs.image-name }}:${GITHUB_HEAD_REF:-main}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         id: docker_build
         with:
-          context: demo
-          file: demo/Dockerfile
+          context: "${{ inputs.context }}"
+          file: "${{ inputs.context }}/${{ inputs.dockerfile }}"
           push: true
           tags: ${{ env.IMAGE }}
           labels: |
