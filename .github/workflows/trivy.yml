@@ -46,7 +46,7 @@ jobs:
             echo "Secret exists and has content (length: ${SECRET_VALUE})"
           fi
         env:
-          SECRET_VALUE: ${{ secrets.YOUR_SECRET_NAME }}
+          SECRET_VALUE: ${{ secrets.COSIGN_PUBLIC_KEY }}
       
       - name: Print Keys
         env:

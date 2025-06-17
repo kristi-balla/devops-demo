@@ -5,12 +5,14 @@ buildx
 Buildx
 burrunan
 checkmarx
+chfn
 CODEOWNERS
 ctxt
 customword
 demangle
 distroless
 dists
+dlopen
 dockerfiles
 Dockerfiles
 dockle
@@ -26,6 +28,11 @@ kristi
 libpeerconnection
 libiberty
 libc
+libexpat
+libgcc
+liblcms
+libstdc
+libuuid
 licenseheaders
 madrapps
 memoriae
@@ -34,6 +41,8 @@ nbbuild
 nbdist
 nonroot
 opencontainers
+pthread
+regexec
 renovatebot
 sarif
 semgrep
@@ -49,3 +58,4 @@ testem
 Tesch
 tesch
 tflint
+thesmooth
