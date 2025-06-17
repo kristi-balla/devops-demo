@@ -38,7 +38,7 @@ jobs:
       image-registry: ${{ inputs.image-registry }}
       image-name: ${{ inputs.image-name }}
       image-tag: ${{ inputs.image-tag }}
-    perimssions:
+    permissions:
       contents: read
       packages: write
   dockle:
