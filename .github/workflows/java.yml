@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - uses: burrunan/gradle-cache-action@4a07779efc8120348ea6dfd35314bc30a586eb0f
+      - uses: burrunan/gradle-cache-action@663fbad34e03c8f12b27f4999ac46e3d90f87eca
         name: Check Java files
         with:
           arguments: check
@@ -37,7 +37,7 @@ jobs:
           save-generated-gradle-jars: true
           gradle-version: current
 
-      - uses: burrunan/gradle-cache-action@4a07779efc8120348ea6dfd35314bc30a586eb0f
+      - uses: burrunan/gradle-cache-action@663fbad34e03c8f12b27f4999ac46e3d90f87eca
         name: Check build.gradle
         with:
           arguments: lintGradle
@@ -45,7 +45,7 @@ jobs:
           save-generated-gradle-jars: true
           gradle-version: current
 
-      - uses: burrunan/gradle-cache-action@4a07779efc8120348ea6dfd35314bc30a586eb0f
+      - uses: burrunan/gradle-cache-action@663fbad34e03c8f12b27f4999ac46e3d90f87eca
         name: Test
         with:
           arguments: test
@@ -53,7 +53,7 @@ jobs:
           save-generated-gradle-jars: true
           gradle-version: current
 
-      - uses: burrunan/gradle-cache-action@4a07779efc8120348ea6dfd35314bc30a586eb0f
+      - uses: burrunan/gradle-cache-action@663fbad34e03c8f12b27f4999ac46e3d90f87eca
         name: Generate Test Reports
         with:
           arguments: jacocoTestReport
