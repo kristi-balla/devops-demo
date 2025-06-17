@@ -48,13 +48,9 @@ jobs:
           password: ${{ github.token }}
 
       - name: Run Dockle
-        uses: erzz/dockle-action@v1
+        uses: goodwithtech/dockle-action@e30e6af832aad6ea7dca2a248d31a85eab6dbd68
         with:
           image: "${{ inputs.image-registry }}/${{ inputs.image-name }}@${{ inputs.image-digest }}"
-          report-format: sarif
-          report-name: dockle-results
-          failure-threshold: fatal
+          exit-level: fatal
           exit-code: 1
-          dockle-version: 0.4.11
-          accept-extensions: pem
-          ignore-codes: ${{ inputs.ignore-codes }}
+          ignore: ${{ inputs.ignore-codes }}
