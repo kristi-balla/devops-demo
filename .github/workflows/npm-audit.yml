@@ -1,0 +1,31 @@
+# Copyright © Siemens 2025 - 2025
+#
+# Licensed under the Siemens Inner Source License 1.5
+#
+# Authors: Tesch, Jan (FT RPD CST SEA-DE)
+#
+# SPDX-FileCopyrightText: 2025 Siemens
+#
+# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+
+name: npm audit
+
+on:
+  workflow_call:
+
+jobs:
+  npm-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ui
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: audit node dependencies
+        run: npm audit
+    
