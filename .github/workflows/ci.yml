@@ -34,12 +34,6 @@ jobs:
       pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
-  dockerfile_linting:
-    permissions:
-      contents: read
-      pull-requests: write
-    name: dockerfile_linting
-    uses: ./.github/workflows/hadolint.yml
   terraform_linting:
     uses: ./.github/workflows/tflint.yml
   k8s_linting:
@@ -58,23 +52,18 @@ jobs:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/kics.yml
-  deploy:
-    permissions:
-      contents: read
-      packages: write
-    uses: ./.github/workflows/docker.yml
-  container_image_linting:
-    needs: [deploy]   
-    uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  trivy:
-    permissions:
-      packages: write
-    secrets:
-      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+  build-java-container:
+    uses: ./.github/workflows/build-container/build-container.yml
     needs:
-      - deploy
-    uses: ./.github/workflows/build-container/trivy.yml
+      - java_linting
+    with: 
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+    permissions:
+      contents: read
+      packages: write
