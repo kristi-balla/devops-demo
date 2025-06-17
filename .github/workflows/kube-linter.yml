@@ -22,7 +22,7 @@ jobs:
       # Allows the workflow to write security events, such as SARIF reports, to the repository.
       security-events: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
 
       - name: Scan yaml files with kube-linter
         uses: stackrox/kube-linter-action@87802a2f4e01abebb3ee3c67a3002fea71f6eae5
