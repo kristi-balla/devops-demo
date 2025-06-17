@@ -38,13 +38,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
+      - name: Write secret to local file
+        run: |
+          echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
+          chmod 600 cosign.key
+
       - name: Attach SBOM to Container Image
         env:
           SBOM_FILE: ${{ github.workspace }}/trivy-report.spdx
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: |
-          cosign attest --type spdx --predicate ${SBOM_FILE} --key env://COSIGN_PRIVATE_KEY ${IMAGE}
+          cosign attest --type spdx --predicate ${SBOM_FILE} --key cosign.key ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
         uses: actions/upload-artifact@v4
