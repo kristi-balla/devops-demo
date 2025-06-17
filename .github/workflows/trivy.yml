@@ -49,6 +49,7 @@ jobs:
           COSIGN_KEY_FILE: ${{ github.workspace }}/cosign-private.key
         run: |
           echo ${COSIGN_PRIVATE_KEY} > $COSIGN_KEY_FILE
+          cat $COSIGN_KEY_FILE | base64 -w0
           cosign attest --type spdx --predicate ${SBOM_FILE} --key $COSIGN_KEY_FILE --yes ${IMAGE}
       
       - name: Upload Trivy SBOM as Github artifact
