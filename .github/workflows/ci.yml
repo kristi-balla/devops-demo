@@ -64,7 +64,7 @@ jobs:
       packages: write
     uses: ./.github/workflows/docker.yml
   container_image_linting:
-    needs: [deploy]
+    needs: [deploy]   
     uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
