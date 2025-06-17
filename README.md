@@ -34,7 +34,7 @@ We use reusable workflows for this project. Each workflow starts at a `base` CI 
 Here is an exhaustive list of all workflows you can find in the `.github/workflows` folder:
 
 - `java`: this workflow uses a `gradle` action to check the java code and run tests. The `nebula.lint` plugin is used to lint the `build.gradle` file itself. The `jacoco` plugin generates test reports that are later included in the PR. The `com.github.spotbugs` plugin checks for common programming bugs in the java code.
-- `build-container`: this demonstrates the flexibility of reusable workflows. It encompasses other actions, which run in a bundle. It takes care of everything from building a docker image, to analysing the result. More specifically, this workflow entails:
+- `build-container`: this demonstrates the flexibility of reusable workflows. It encompasses other actions, which run in a bundle. It takes care of everything from building a docker image, to analyzing the result. More specifically, this workflow entails:
   - [`hadolint`](https://github.com/hadolint/hadolint): This workflow uses the `hadolint` action to lint the `Dockerfile`. It is a good practice to lint your Dockerfiles, as it can help catch common mistakes and improve the overall quality of your images.
   - `docker`: A common workflow to build the container image, and push it to the GitHub Container Registry (`ghcr`). We need the container image in the container registry to demonstrate other tools that scan the image itself.
   - [`dockle`](https://github.com/goodwithtech/dockle): This workflow uses the `dockle` action to scan the container image for security vulnerabilities.
