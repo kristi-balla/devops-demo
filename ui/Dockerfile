@@ -2,7 +2,7 @@
 #
 # Licensed under the Siemens Inner Source License 1.5
 #
-# Authors: Kristi Balla, Tesch, Jan (FT RPD CST SEA-DE)
+# Authors: Kristi Balla, janmalix
 #
 # SPDX-FileCopyrightText: 2025 Siemens
 #
