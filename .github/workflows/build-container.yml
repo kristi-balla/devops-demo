@@ -25,11 +25,11 @@ jobs:
     permissions:
       contents: read
     name: Hadolint
-    uses: ./github/workflows/build-container/hadolint.yml
+    uses: ./github/workflows/hadolint.yml
     with:
       dockerfile: ${{ inputs.dockerfile }}
   docker:
-    uses: ./github/workflows/build-container/docker.yml
+    uses: ./github/workflows/docker.yml
     needs:
       - hadolint
     with:
@@ -42,7 +42,7 @@ jobs:
       contents: read
       packages: write
   dockle:
-    uses: ./github/workflows/build-container/dockle.yml
+    uses: ./github/workflows/dockle.yml
     needs:
       - docker
     with:
@@ -50,7 +50,7 @@ jobs:
       image-name: ${{ inputs.image-name }}
       image-digest: ${{ needs.docker.outputs.image-digest }}
   trivy:
-    uses: ./github/workflows/build-container/trivy.yml
+    uses: ./github/workflows/trivy.yml
     needs:
       - docker
     with:

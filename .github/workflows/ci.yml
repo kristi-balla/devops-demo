@@ -57,7 +57,7 @@ jobs:
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
   build-java-container:
-    uses: ./.github/workflows/build-container/build-container.yml
+    uses: ./.github/workflows/build-container.yml
     needs:
       - java_linting
     with: 
