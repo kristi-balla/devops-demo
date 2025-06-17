@@ -12,33 +12,45 @@ name: container image linting
 
 on:
   workflow_call:
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: kristi-balla/devops-demo
+    inputs:
+      image-digest:
+        description: The digest of the built image
+        required: true
+        type: string
+      image-registry:
+        description: The container registry to push the image to
+        required: false
+        type: string
+        default: ghcr.io
+      image-name:
+        description: The name of the image to build and push
+        required: true
+        type: string
+      ignore-codes:
+        description: Comma-separated list of codes to ignore
+        required: false
+        type: string
+        default: ""
 
 jobs:
-  build-and-push:
+  image-scanning:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Login to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ inputs.image-registry }}
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Run Dockle
-        uses: erzz/dockle-action@v1
+        uses: goodwithtech/dockle-action@e30e6af832aad6ea7dca2a248d31a85eab6dbd68
         with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          report-format: sarif
-          report-name: dockle-results
-          failure-threshold: fatal
+          image: "${{ inputs.image-registry }}/${{ inputs.image-name }}@${{ inputs.image-digest }}"
+          exit-level: fatal
           exit-code: 1
-          dockle-version: 0.4.11
-          accept-extensions: pem
+          ignore: ${{ inputs.ignore-codes }}

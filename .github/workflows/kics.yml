@@ -22,10 +22,10 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Lint Everything
-        uses: checkmarx/kics-github-action@v2.1.10
+        uses: checkmarx/kics-github-action@c06a133a98c75c2f920014d688015a5fb18095a4
         id: kics-action-scan
         with:
           path: ${{ github.workspace }}

@@ -19,6 +19,7 @@ dockle
 Dockle
 erzz
 factorypath
+goodwithtech
 gradlew
 healthcheck
 jacoco

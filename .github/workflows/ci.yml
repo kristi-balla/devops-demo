@@ -34,12 +34,6 @@ jobs:
       pull-requests: write
     name: java
     uses: ./.github/workflows/java.yml
-  dockerfile_linting:
-    permissions:
-      contents: read
-      pull-requests: write
-    name: dockerfile_linting
-    uses: ./.github/workflows/hadolint.yml
   terraform_linting:
     uses: ./.github/workflows/tflint.yml
   k8s_linting:
@@ -58,23 +52,34 @@ jobs:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/kics.yml
-  deploy:
-    permissions:
-      contents: read
-      packages: write
-    uses: ./.github/workflows/docker.yml
-  container_image_linting:
-    needs: [deploy]   
-    uses: ./.github/workflows/dockle.yml
   spellcheck:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  trivy:
+  build-java-container:
+    uses: ./.github/workflows/build-container.yml
+    with: 
+      context: ./demo
+      dockerfile: ./demo/Dockerfile
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/java
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     permissions:
+      contents: read
       packages: write
     secrets:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-    needs:
-      - deploy
-    uses: ./.github/workflows/trivy.yml
+  build-js-container:
+    uses: ./.github/workflows/build-container.yml
+    with: 
+      context: ./ui
+      dockerfile: ./ui/Dockerfile
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/ui
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      ignore-codes: "CIS-DI-0010"
+    permissions:
+      contents: read
+      packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}

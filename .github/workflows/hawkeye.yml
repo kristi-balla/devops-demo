@@ -19,9 +19,9 @@ jobs:
             contents: read
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
             - name: Run Hawkeye
-              uses: korandoru/hawkeye@v6
+              uses: korandoru/hawkeye@cdc68d9c8ace500aefcd8f4dd39b915cd06305dd
               with:
                 github_token: ${{ github.token }}
