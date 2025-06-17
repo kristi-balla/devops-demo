@@ -34,7 +34,7 @@ Here is an exhaustive list of all workflows you can find in the `.github/workflo
   - [`hadolint`](https://github.com/hadolint/hadolint): This workflow uses the `hadolint` action to lint the `Dockerfile`. It is a good practice to lint your Dockerfiles, as it can help catch common mistakes and improve the overall quality of your images.
   - `docker`: A common workflow to build the container image, and push it to the GitHub Container Registry (`ghcr`). We need the container image in the container registry to demonstrate other tools that scan the image itself.
   - [`dockle`](https://github.com/goodwithtech/dockle): This workflow uses the `dockle` action to scan the container image for security vulnerabilities.
-  - [`trivy`](https://trivy.dev/latest/): This workflow uses the `trivy` action to find vulnerabilities in the container image and generate a Software Bill of Materials (SBOM).
+  - [`trivy`](https://trivy.dev/latest/): This workflow uses the `trivy` action to find vulnerabilities in the container image and generate a Software Bill of Materials (SBOM). The SBOM is then signed via `cosign` with a key generated via `GITHUB_TOKEN="<your-token>" cosign generate-key-pair github://kristi-balla/devops-demo`.
 - [`tflint`](https://github.com/terraform-linters/tflint): This workflow uses the `tflint` action to lint the Terraform code.
 - [`kics`](https://kics.io/index.html#): This workflow uses the `kics` action to scan the codebase for security vulnerabilities.
 - [`kube-linter`](https://docs.kubelinter.io/#/): The tool is still in an early stage of development, but it works for our basic use-case. In addition, some alerts might overlap with other linters.
