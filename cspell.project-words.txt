@@ -19,10 +19,12 @@ dockle
 Dockle
 erzz
 factorypath
+firstname
 goodwithtech
 gradlew
 healthcheck
 jacoco
+janmalix
 kics
 korandoru
 kristi
