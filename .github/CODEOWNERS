@@ -1,0 +1,12 @@
+# Default Code Owners file for the repository.
+* @kristi-balla @jan-tesch
+
+# Only @jan-tesch can approve changes to files in /.github/
+/.github/ @jan-tesch
+
+# ... but only @kristi-balla can approve changes to the CODEOWNERS file.
+/.github/CODEOWNERS @kristi-balla
+
+# Anyone with write permissions can approve changes to the following directories and files.
+/demo/
+/ui/
