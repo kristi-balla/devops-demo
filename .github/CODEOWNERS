@@ -1,8 +1,8 @@
 # Default Code Owners file for the repository.
-* @kristi-balla @jan-tesch
+* @kristi-balla @janmalix
 
-# Only @jan-tesch can approve changes to files in /.github/
-/.github/ @jan-tesch
+# Only @janmalix can approve changes to files in /.github/
+/.github/ @janmalix
 
 # ... but only @kristi-balla can approve changes to the CODEOWNERS file.
 /.github/CODEOWNERS @kristi-balla

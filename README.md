@@ -39,8 +39,8 @@ In this section, we will discuss the security measures we have implemented in th
 
 To reduce the risk of accidental changes to critical files, we use the [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file. The file is located in the `.github` folder, and it defines the code owners for the project. The code owners are responsible for reviewing and approving changes to the codebase.
 
-- If not specified otherwise, the code owner are @kristi-balla and @jan-tesch, i.e., one of them must approve the changes.
-- Only @jan-tesch can approve changes to the `/.github/` folder, i.e., the GitHub workflows, and other GitHub-related files.
+- If not specified otherwise, the code owner are @kristi-balla and @janmalix, i.e., one of them must approve the changes.
+- Only @janmalix can approve changes to the `/.github/` folder, i.e., the GitHub workflows, and other GitHub-related files.
 - Only @kristi-balla can approve changes to the `/.github/CODEOWNERS` file itself.
 - Files in the `/demo/` and `/ui/` folders can be approved by anyone who has write access to the repository.
 
