@@ -56,26 +56,26 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  build-java-container:
+  build-backend-container:
     uses: ./.github/workflows/build-container.yml
     with:
       context: ./demo
       dockerfile: ./demo/Dockerfile
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/java
+      image-name: kristi-balla/devops-demo/backend
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     permissions:
       contents: read
       packages: write
     secrets:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-  build-js-container:
+  build-frontend-container:
     uses: ./.github/workflows/build-container.yml
     with:
       context: ./ui
       dockerfile: ./ui/Dockerfile
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/ui
+      image-name: kristi-balla/devops-demo/frontend
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       ignore-codes: "CIS-DI-0010"
     permissions:
