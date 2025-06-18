@@ -44,7 +44,7 @@ jobs:
   sast_1:
     permissions:
       contents: read
-    uses: ./.github/workflows/sem-grep.yml
+    uses: ./.github/workflows/semgrep.yml
   sast_2:
     permissions:
       security-events: write

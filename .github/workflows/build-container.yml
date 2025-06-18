@@ -8,7 +8,7 @@
 #
 # SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
 
-name: build and scan container
+name: container image building and scanning
 
 on:
   workflow_call:

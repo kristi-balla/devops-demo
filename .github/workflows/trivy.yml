@@ -61,7 +61,7 @@ jobs:
           SBOM_FILE: ${{ github.workspace }}/trivy-report-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}.spdx
           COSIGN_PRIVATE_KEY: ${{ secrets.cosign-key }}
           COSIGN_KEY_FILE: ${{ github.workspace }}/cosign-private.key
-        # Passing the env with env://COSIGN_PRIVATE_KEY does not work because the format is not PEM conformant
+        # Passing the env with env://COSIGN_PRIVATE_KEY does NOT work because the format is NOT PEM conformant
         run: |
           echo "${COSIGN_PRIVATE_KEY}" > $COSIGN_KEY_FILE
           cosign attest --type spdx --predicate ${SBOM_FILE} --key ${COSIGN_KEY_FILE} --yes ${IMAGE}
