@@ -12,8 +12,8 @@
 # disables alarms about the missing user instruction
 FROM gradle:8.14.2-jdk21 AS build
 
-LABEL org.opencontainers.image.source=https://github.siemens.cloud/CCS/devops-demo
-LABEL org.opencontainers.image.description="A sample Docker image of a Spring Boot application using Gradle."
+LABEL org.opencontainers.image.source=https://github.com/kristi-balla/devops-demo
+LABEL org.opencontainers.image.description="A sample backend based on Spring Boot."
 LABEL org.opencontainers.image.licenses=MIT
 
 WORKDIR /app

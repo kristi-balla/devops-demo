@@ -80,5 +80,5 @@ jobs:
             org.opencontainers.image.created=${{ github.event.repository.created_at }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.vendor=Siemens AG
+            org.opencontainers.image.vendor="TUM AET"
             org.opencontainers.image.version=${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
