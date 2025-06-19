@@ -34,11 +34,18 @@ on:
         description: The tag for the built image
         required: true
         type: string
+      image-title:
+        description: The title of the image
+        required: true
+        type: string
       image-description:
         description: The description of the image
-        required: false
+        required: true
         type: string
-        default: "My multi-arch image"
+      image-authors:
+        description: The authors of the image
+        required: true
+        type: string
     outputs:
       image-digest:
         description: The digest of the built image
@@ -77,9 +84,9 @@ jobs:
         with:
           images: ${{ inputs.image-name }}
           annotations: |
+            org.opencontainers.image.authors=${{ inputs.image-authors }}
             org.opencontainers.image.description=${{ inputs.image-description }}
-            org.opencontainers.image.authors=${{ github.event.workflow_run.head_commit.message }}
-            org.opencontainers.image.vendor="TUM AET"
+            org.opencontainers.image.vendor=TUM AET
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
       - name: Build and push Docker image
