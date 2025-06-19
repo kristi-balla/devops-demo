@@ -33,6 +33,18 @@ on:
         required: false
         type: string
         default: ""
+      image-title:
+        description: The title of the image
+        required: true
+        type: string
+      image-description:
+        description: The description of the image
+        required: true
+        type: string
+      image-authors:
+        description: The authors of the image
+        required: true
+        type: string
     secrets:
       cosign-key:
         required: true
@@ -52,9 +64,12 @@ jobs:
     with:
       context: ${{ inputs.context }}
       dockerfile: ${{ inputs.dockerfile }}
-      image-registry: ${{ inputs.image-registry }}
+      image-authors: ${{ inputs.image-authors }}
+      image-description: ${{ inputs.image-description }}
       image-name: ${{ inputs.image-name }}
+      image-registry: ${{ inputs.image-registry }}
       image-tag: ${{ inputs.image-tag }}
+      image-title: ${{ inputs.image-title }}
     permissions:
       contents: read
       packages: write
