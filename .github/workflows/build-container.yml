@@ -78,18 +78,18 @@ jobs:
     needs:
       - docker
     with:
-      image-registry: ${{ inputs.image-registry }}
-      image-name: ${{ inputs.image-name }}
-      image-digest: ${{ needs.docker.outputs.image-digest }}
       ignore-codes: ${{ inputs.ignore-codes }}
+      image-digest: ${{ needs.docker.outputs.image-digest }}
+      image-name: ${{ inputs.image-name }}
+      image-registry: ${{ inputs.image-registry }}
   trivy:
     uses: ./.github/workflows/trivy.yml
     needs:
       - docker
     with:
-      image-registry: ${{ inputs.image-registry }}
-      image-name: ${{ inputs.image-name }}
       image-digest: ${{ needs.docker.outputs.image-digest }}
+      image-name: ${{ inputs.image-name }}
+      image-registry: ${{ inputs.image-registry }}
     permissions:
       packages: write
     secrets:
