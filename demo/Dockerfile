@@ -12,10 +12,6 @@
 # disables alarms about the missing user instruction
 FROM gradle:8.14.2-jdk21 AS build
 
-LABEL org.opencontainers.image.source=https://github.siemens.cloud/CCS/devops-demo
-LABEL org.opencontainers.image.description="A sample Docker image of a Spring Boot application using Gradle."
-LABEL org.opencontainers.image.licenses=MIT
-
 WORKDIR /app
 
 COPY build.gradle settings.gradle ./
@@ -26,9 +22,11 @@ COPY src ./src
 RUN gradle build --no-daemon -x test
 
 FROM gcr.io/distroless/java21-debian12:debug-nonroot@sha256:c23123156441cff6195c85cd28fce8f3395ba927536c928a54cfc380130229a4
+
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
