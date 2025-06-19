@@ -75,7 +75,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ inputs.image-name }}
-          labels: |
+          annotations: |
             org.opencontainers.image.description=${{ inputs.image-description }}
             org.opencontainers.image.authors=${{ github.event.head_commit.author.name }}
             org.opencontainers.image.vendor="TUM AET"
