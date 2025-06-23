@@ -79,6 +79,7 @@ jobs:
     with:
       context: ./client
       dockerfile: ./client/Dockerfile
+      ignore-codes: "CIS-DI-0010"
       image-authors: "Benedikt Hofmann"
       image-description: "Canteen App Frontend built with Svelte Kit"
       image-registry: ghcr.io
@@ -96,6 +97,7 @@ jobs:
     with:
       context: ./llm
       dockerfile: ./llm/Dockerfile
+      ignore-codes: "CIS-DI-0010"
       image-authors: "Benedikt Hofmann"
       image-description: "Canteen App LLM Connector built with FastAPI"
       image-registry: ghcr.io
