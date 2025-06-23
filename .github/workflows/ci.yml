@@ -64,7 +64,6 @@ jobs:
       dockerfile: ./server/Dockerfile
       image-authors: "Patrick Stoeckle"
       image-description: "Canteen App Backend built with Spring Boot"
-      image-name: kristi-balla/devops-demo/backend
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo/server
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
@@ -82,7 +81,6 @@ jobs:
       dockerfile: ./client/Dockerfile
       image-authors: "Benedikt Hofmann"
       image-description: "Canteen App Frontend built with Svelte Kit"
-      image-name: kristi-balla/devops-demo/frontend
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo/client
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
