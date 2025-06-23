@@ -44,7 +44,7 @@ jobs:
   sast_1:
     permissions:
       contents: read
-    uses: ./.github/workflows/sem-grep.yml
+    uses: ./.github/workflows/semgrep.yml
   sast_2:
     permissions:
       security-events: write
@@ -56,28 +56,34 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  build-java-container:
+  build-backend-container:
     uses: ./.github/workflows/build-container.yml
     with:
       context: ./demo
       dockerfile: ./demo/Dockerfile
+      image-authors: "Patrick Stoeckle"
+      image-description: "Sample backend based on Spring Boot"
+      image-name: kristi-balla/devops-demo/backend
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/java
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "DevOps Demo Backend"
     permissions:
       contents: read
       packages: write
     secrets:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-  build-js-container:
+  build-frontend-container:
     uses: ./.github/workflows/build-container.yml
     with:
       context: ./ui
       dockerfile: ./ui/Dockerfile
-      image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/ui
-      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       ignore-codes: "CIS-DI-0010"
+      image-authors: "Benedikt Hofmann"
+      image-description: "Sample Frontend based on Angular"
+      image-name: kristi-balla/devops-demo/frontend
+      image-registry: ghcr.io
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "DevOps Demo Frontend"
     permissions:
       contents: read
       packages: write
