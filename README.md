@@ -63,7 +63,7 @@ Here is an exhaustive list of all workflows you can find in the `.github/workflo
 - [`tflint`](.github/workflows/tflint.yml): this workflow uses [`tflint`](https://github.com/terraform-linters/tflint) to lint the Terraform code.
 - [`kics`](.github/workflows/kics.yml): this workflow uses [`kics`](https://kics.io/index.html#) to scan the codebase for security vulnerabilities.
 - [`kube-linter`](.github/workflows/kube-linter.yml): this workflow uses [`kube-linter`](https://docs.kubelinter.io/#/). The tool is still in an early stage of development, but it works for our basic use-case. In addition, some alerts might overlap with other linters.
-- [`semgrep`](.github/workflows/semgrep.yml): [`semgrep`](https://github.com/semgrep/semgrep) et another static-analysis tool. Creating an account with the service opens the door to ✨ _AI-enhanced_ ✨ feedback, but the free OSS version can catch some early errors as well.
+- [`semgrep`](.github/workflows/semgrep.yml): [`semgrep`](https://github.com/semgrep/semgrep) is a static-analysis tool for various languages. Creating an account with the service opens the door to ✨ _AI-enhanced_ ✨ feedback, but the free OSS version can catch some early errors as well.
 - [`renovatebot`](https://github.com/renovatebot): GitHub `dependabot` is not the only tool out there to update third-party dependencies. [`renovate`](https://docs.renovatebot.com/) can be added as a separate action, or as a GitHub Application, but you need to create a free account. Since we added it as GitHub Application, there is **NO** renovate workflow file.
 
 **Other workflows:**
