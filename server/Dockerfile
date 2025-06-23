@@ -15,7 +15,7 @@ COPY src ./src
 RUN gradle bootJar --no-daemon
 
 # Stage 2: Run the application
-FROM gcr.io/distroless/java21-debian12
+FROM gcr.io/distroless/java21-debian12:nonroot
 
 WORKDIR /app
 
