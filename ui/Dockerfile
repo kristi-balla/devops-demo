@@ -1,12 +1,12 @@
-# Copyright © Siemens 2025 - 2025
+# Copyright © TUM AET 2025 - 2025
 #
-# Licensed under the Siemens Inner Source License 1.5
+# Licensed under the MIT License
 #
-# Authors: Kristi Balla, janmalix
+# Authors: Benedikt Hofmann, Patrick Stoeckle, and other contributors
 #
-# SPDX-FileCopyrightText: 2025 Siemens
+# SPDX-FileCopyrightText: 2025 TUM AET
 #
-# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+# SPDX-License-Identifier: MIT
 
 FROM node:22-alpine@sha256:41e4389f3d988d2ed55392df4db1420ad048ae53324a8e2b7c6d19508288107e AS builder
 
