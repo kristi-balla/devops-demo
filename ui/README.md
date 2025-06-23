@@ -1,13 +1,13 @@
 <!--
-Copyright © Siemens 2025 - 2025
+Copyright © TUM AET 2025 - 2025
 
-Licensed under the Siemens Inner Source License 1.5
+Licensed under the MIT License
 
-Authors: Kristi Balla
+Authors: Benedikt Hofmann, Patrick Stoeckle, and other contributors
 
-SPDX-FileCopyrightText: 2025 Siemens
+SPDX-FileCopyrightText: 2025 TUM AET
 
-SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+SPDX-License-Identifier: MIT
 -->
 
 # Ui

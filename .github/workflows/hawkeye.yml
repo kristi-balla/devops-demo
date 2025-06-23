@@ -1,12 +1,12 @@
-# Copyright © Siemens 2025 - 2025
+# Copyright © TUM AET 2025 - 2025
 #
-# Licensed under the Siemens Inner Source License 1.5
+# Licensed under the MIT License
 #
-# Authors: Kristi Balla, janmalix
+# Authors: Benedikt Hofmann, Patrick Stoeckle, and other contributors
 #
-# SPDX-FileCopyrightText: 2025 Siemens
+# SPDX-FileCopyrightText: 2025 TUM AET
 #
-# SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
+# SPDX-License-Identifier: MIT
 
 on:
     workflow_call:
@@ -20,6 +20,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.ref }}
 
             - name: Run Hawkeye
               uses: korandoru/hawkeye@cdc68d9c8ace500aefcd8f4dd39b915cd06305dd
