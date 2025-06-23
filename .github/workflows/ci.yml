@@ -56,28 +56,44 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  build-java-container:
+
+  build-server-container:
     uses: ./.github/workflows/build-container.yml
     with:
-      context: ./demo
-      dockerfile: ./demo/Dockerfile
+      context: ./server
+      dockerfile: ./server/Dockerfile
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/java
+      image-name: kristi-balla/devops-demo/server
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     permissions:
       contents: read
       packages: write
     secrets:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-  build-js-container:
+
+  build-client-container:
     uses: ./.github/workflows/build-container.yml
     with:
-      context: ./ui
-      dockerfile: ./ui/Dockerfile
+      context: ./client
+      dockerfile: ./client/Dockerfile
       image-registry: ghcr.io
-      image-name: kristi-balla/devops-demo/ui
+      image-name: kristi-balla/devops-demo/client
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       ignore-codes: "CIS-DI-0010"
+    permissions:
+      contents: read
+      packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
+  build-llm-container:
+    uses: ./.github/workflows/build-container.yml
+    with:
+      context: ./llm
+      dockerfile: ./llm/Dockerfile
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/llm
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
     permissions:
       contents: read
       packages: write
