@@ -14,7 +14,7 @@ on:
   workflow_call:
 
 env:
-  BUILD_ROOT: demo
+  BUILD_ROOT: server
 
 jobs:
   java:
