@@ -4,15 +4,16 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
-RUN npm prune --production
+RUN npm run build \
+ && npm prune --production
 
 # Use a distroless image for the final stage
-FROM gcr.io/distroless/nodejs22-debian12
+FROM gcr.io/distroless/nodejs22-debian12:nonroot
 WORKDIR /app
-COPY --from=builder /app/build build/
-COPY --from=builder /app/node_modules node_modules/
+COPY --from=builder --chown=1005 /app/build build/
+COPY --from=builder --chown=1005 /app/node_modules node_modules/
 COPY package.json .
 EXPOSE 3000
 ENV NODE_ENV=production
+USER 1005
 CMD ["build/index.js"]
