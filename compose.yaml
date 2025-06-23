@@ -9,13 +9,16 @@ services:
       - DATABASE_URL=jdbc:postgresql://database:5432/mensa
       - LLM_SERVICE_URL=http://llm:5000
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     restart: unless-stopped
+    security_opt: 
+      - no-new-privileges=true
+    # TODO add healthcheck
 
   database:
     image: postgres:17
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-supersecret}
@@ -23,6 +26,9 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     restart: unless-stopped
+    security_opt: 
+      - no-new-privileges=true
+    # TODO add healthcheck
 
   client:
     image: ghcr.io/aet-devops25/w09-solution/client:latest
@@ -30,12 +36,15 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - PUBLIC_API_URL=${PUBLIC_API_URL:-http://localhost:8080/api}
     depends_on:
       - server
     restart: unless-stopped
+    security_opt: 
+      - no-new-privileges=true
+    # TODO add healthcheck
 
   llm:
     image: ghcr.io/aet-devops25/w09-solution/llm:latest
@@ -45,8 +54,12 @@ services:
     environment:
       - CHAIR_API_KEY=${CHAIR_API_KEY:-your_api_key_here}
     ports:
-      - "5000:5000"
+      - "127.0.0.1:5000:5000"
     restart: unless-stopped
+    security_opt: 
+      - no-new-privileges=true
+    # TODO add healthcheck
 
 volumes:
   db_data:
+  # TODO add internal networks

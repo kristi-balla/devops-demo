@@ -44,7 +44,7 @@ jobs:
   sast_1:
     permissions:
       contents: read
-    uses: ./.github/workflows/sem-grep.yml
+    uses: ./.github/workflows/semgrep.yml
   sast_2:
     permissions:
       security-events: write
@@ -62,9 +62,13 @@ jobs:
     with:
       context: ./server
       dockerfile: ./server/Dockerfile
+      image-authors: "Patrick Stoeckle"
+      image-description: "Canteen App Backend built with Spring Boot"
+      image-name: kristi-balla/devops-demo/backend
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo/server
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Canteen App Backend"
     permissions:
       contents: read
       packages: write
@@ -76,10 +80,13 @@ jobs:
     with:
       context: ./client
       dockerfile: ./client/Dockerfile
+      image-authors: "Benedikt Hofmann"
+      image-description: "Canteen App Frontend built with Svelte Kit"
+      image-name: kristi-balla/devops-demo/frontend
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo/client
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-      ignore-codes: "CIS-DI-0010"
+      image-title: "Canteen App Frontend"
     permissions:
       contents: read
       packages: write
@@ -91,9 +98,12 @@ jobs:
     with:
       context: ./llm
       dockerfile: ./llm/Dockerfile
+      image-authors: "Benedikt Hofmann"
+      image-description: "Canteen App LLM Connector built with FastAPI"
       image-registry: ghcr.io
       image-name: kristi-balla/devops-demo/llm
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Canteen App LLM Connector"
     permissions:
       contents: read
       packages: write

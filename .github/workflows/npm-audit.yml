@@ -8,7 +8,7 @@
 #
 # SPDX-License-Identifier: LicenseRef-Siemens-ISL-1.5
 
-name: npm audit
+name: searching for 3rd party vulnerabilities in node dependencies using npm audit
 
 on:
   workflow_call:
