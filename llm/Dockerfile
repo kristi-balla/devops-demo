@@ -24,4 +24,5 @@ USER 8347
 
 EXPOSE 5000
 HEALTHCHECK --interval=30s --timeout=10s --retries=5 CMD wget --spider --quiet http://localhost:5000/health
+USER nonroot
 ENTRYPOINT ["/venv/bin/python3", "main.py"]
