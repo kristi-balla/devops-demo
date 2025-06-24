@@ -1,0 +1,5 @@
+resources:
+  - llm.yml
+  - postgres.yml
+  - server.yml
+  - client.yml
