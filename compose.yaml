@@ -1,6 +1,6 @@
 services:
   server:
-    image: ghcr.io/aet-devops25/w09-solution/server:latest
+    image: ghcr.io/kristi-balla/devops-demo/server:latest
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -11,9 +11,20 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+      llm:
+        condition: service_healthy
     security_opt: 
       - no-new-privileges=true
-    # TODO add healthcheck
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/api/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mensanet
 
   database:
     image: postgres:17
@@ -28,26 +39,39 @@ services:
     restart: unless-stopped
     security_opt: 
       - no-new-privileges=true
-    # TODO add healthcheck
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mensanet
 
   client:
-    image: ghcr.io/aet-devops25/w09-solution/client:latest
+    image: ghcr.io/kristi-balla/devops-demo/client:latest
     build:
       context: ./client
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:3000:3000"
     environment:
-      - PUBLIC_API_URL=${PUBLIC_API_URL:-http://localhost:8080/api}
+      - PUBLIC_API_URL=${PUBLIC_API_URL:-http://127.0.0.1:8080/api}
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     restart: unless-stopped
     security_opt: 
       - no-new-privileges=true
-    # TODO add healthcheck
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mensanet
 
   llm:
-    image: ghcr.io/aet-devops25/w09-solution/llm:latest
+    image: ghcr.io/kristi-balla/devops-demo/llm:latest
     build:
       context: ./llm
       dockerfile: Dockerfile
@@ -58,8 +82,17 @@ services:
     restart: unless-stopped
     security_opt: 
       - no-new-privileges=true
-    # TODO add healthcheck
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mensanet
 
 volumes:
   db_data:
-  # TODO add internal networks
+
+networks:
+  mensanet:
+    driver: bridge

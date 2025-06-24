@@ -16,9 +16,12 @@ COPY requirements.txt /requirements.txt
 RUN /venv/bin/pip install --disable-pip-version-check -r /requirements.txt
 
 # Copy the virtualenv into a distroless image
-FROM gcr.io/distroless/python3-debian12:nonroot
+FROM gcr.io/distroless/python3-debian12:debug-nonroot
 COPY --from=build-venv --chown=8347 /venv /venv
 COPY . /app
 WORKDIR /app
 USER 8347
+
+EXPOSE 5000
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 CMD wget --spider --quiet http://localhost:5000/health
 ENTRYPOINT ["/venv/bin/python3", "main.py"]

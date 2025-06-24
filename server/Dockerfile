@@ -15,7 +15,7 @@ COPY src ./src
 RUN gradle bootJar --no-daemon
 
 # Stage 2: Run the application
-FROM gcr.io/distroless/java21-debian12:nonroot
+FROM gcr.io/distroless/java21-debian12:debug-nonroot
 
 WORKDIR /app
 
@@ -24,6 +24,7 @@ COPY --from=build /app/build/libs/*.jar app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 CMD wget --spider --quiet http://localhost:8080/api/actuator/health
 
 # Command to run the application
 CMD ["app.jar"]
