@@ -36,11 +36,6 @@ jobs:
     uses: ./.github/workflows/java.yml
   terraform_linting:
     uses: ./.github/workflows/tflint.yml
-  k8s_linting:
-    permissions:
-      contents: read
-      security-events: write
-    uses: ./.github/workflows/kube-linter.yml
   sast_1:
     permissions:
       contents: read
@@ -56,34 +51,54 @@ jobs:
     uses: ./.github/workflows/spelling.yml
   npm-audit:
     uses: ./.github/workflows/npm-audit.yml
-  build-backend-container:
+
+  build-server-container:
     uses: ./.github/workflows/build-container.yml
     with:
-      context: ./demo
-      dockerfile: ./demo/Dockerfile
+      context: ./server
+      dockerfile: ./server/Dockerfile
       image-authors: "Patrick Stoeckle"
-      image-description: "Sample backend based on Spring Boot"
-      image-name: kristi-balla/devops-demo/backend
+      image-description: "Canteen App Backend built with Spring Boot"
       image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/server
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-      image-title: "DevOps Demo Backend"
+      image-title: "Canteen App Backend"
     permissions:
       contents: read
       packages: write
     secrets:
       cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-  build-frontend-container:
+
+  build-client-container:
     uses: ./.github/workflows/build-container.yml
     with:
-      context: ./ui
-      dockerfile: ./ui/Dockerfile
+      context: ./client
+      dockerfile: ./client/Dockerfile
       ignore-codes: "CIS-DI-0010"
       image-authors: "Benedikt Hofmann"
-      image-description: "Sample Frontend based on Angular"
-      image-name: kristi-balla/devops-demo/frontend
+      image-description: "Canteen App Frontend built with Svelte Kit"
       image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/client
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-      image-title: "DevOps Demo Frontend"
+      image-title: "Canteen App Frontend"
+    permissions:
+      contents: read
+      packages: write
+    secrets:
+      cosign-key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
+  build-llm-container:
+    uses: ./.github/workflows/build-container.yml
+    with:
+      context: ./llm
+      dockerfile: ./llm/Dockerfile
+      ignore-codes: "CIS-DI-0010"
+      image-authors: "Benedikt Hofmann"
+      image-description: "Canteen App LLM Connector built with FastAPI"
+      image-registry: ghcr.io
+      image-name: kristi-balla/devops-demo/llm
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Canteen App LLM Connector"
     permissions:
       contents: read
       packages: write

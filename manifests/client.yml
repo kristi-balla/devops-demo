@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: client
+          image: ghcr.io/kristi-balla/devops-demo/client:main
+          imagePullPolicy: Always
+          env:
+            - name: PUBLIC_API_URL
+              value: http://server:8080/api
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 30
+          resources:
+            requests:
+              cpu: 1
+              memory: 100Mi
+            limits:
+              cpu: 2
+              memory: 500Mi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client
+  namespace: demo
+spec:
+  selector:
+    app: client
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm
+  template:
+    metadata:
+      labels:
+        app: llm
+    spec:
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: llm
+          image: ghcr.io/kristi-balla/devops-demo/llm:main
+          imagePullPolicy: Always
+          env:
+            - name: CHAIR_API_KEY
+              value: your_api_key_here
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 30
+          resources:
+            requests:
+              cpu: 1
+              memory: 100Mi
+            limits:
+              cpu: 2
+              memory: 500Mi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm
+  namespace: demo
+spec:
+  selector:
+    app: llm
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
