@@ -17,7 +17,7 @@ services:
       llm:
         condition: service_healthy
     security_opt: 
-      - no-new-privileges=true
+      - no-new-privileges:true
     cap_drop:
       - ALL
     healthcheck:
@@ -40,7 +40,7 @@ services:
       - db_data:/var/lib/postgresql/data
     restart: unless-stopped
     security_opt: 
-      - no-new-privileges=true
+      - no-new-privileges:true
     cap_drop:
       - ALL
     cap_add:
@@ -71,7 +71,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     security_opt: 
-      - no-new-privileges=true
+      - no-new-privileges:true
     cap_drop:
       - ALL
     healthcheck:
@@ -93,7 +93,7 @@ services:
       - "127.0.0.1:5000:5000"
     restart: unless-stopped
     security_opt: 
-      - no-new-privileges=true
+      - no-new-privileges:true
     cap_drop:
       - ALL
     healthcheck:

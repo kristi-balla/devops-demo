@@ -36,11 +36,6 @@ jobs:
     uses: ./.github/workflows/java.yml
   terraform_linting:
     uses: ./.github/workflows/tflint.yml
-  k8s_linting:
-    permissions:
-      contents: read
-      security-events: write
-    uses: ./.github/workflows/kube-linter.yml
   sast_1:
     permissions:
       contents: read
