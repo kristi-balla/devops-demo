@@ -27,4 +27,5 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=10s --retries=5 CMD wget --spider --quiet http://localhost:8080/api/actuator/health
 
 # Command to run the application
+USER nonroot
 CMD ["app.jar"]
