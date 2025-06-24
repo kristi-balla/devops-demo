@@ -1,0 +1,4 @@
+Contact: mailto:security@example.com
+Expires: 2026-01-23T23:00:00.000Z
+Preferred-Languages: en,de
+Policy: https://github.com/kristi-balla/devops-demo/blob/main/.github/SECURITY.md
