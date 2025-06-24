@@ -24,6 +24,6 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf
+        uses: hadolint/hadolint-action@d292784f8f3eacda47060b259a580467b0ba410c
         with:
           dockerfile: ${{ inputs.dockerfile }}
