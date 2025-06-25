@@ -63,6 +63,7 @@ jobs:
           COSIGN_KEY_FILE: ${{ github.workspace }}/cosign-private.key
         # Passing the env with env://COSIGN_PRIVATE_KEY does NOT work because the format is NOT PEM conformant
         run: |
+          echo "${COSIGN_PRIVATE_KEY}"
           echo "${COSIGN_PRIVATE_KEY}" > $COSIGN_KEY_FILE
           cosign attest --type spdx --predicate ${SBOM_FILE} --key ${COSIGN_KEY_FILE} --yes ${IMAGE}
 
