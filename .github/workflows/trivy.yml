@@ -50,7 +50,7 @@ jobs:
         uses: sigstore/cosign-installer@fb28c2b6339dcd94da6e4cbcbc5e888961f6f8c3
 
       - name: Login to GHCR
-        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
+        uses: docker/login-action@ef38ec311a7df3f01475313e7c5bb584b74b112a
         with:
           registry: ${{ inputs.image-registry }}
           username: ${{ github.actor }}
