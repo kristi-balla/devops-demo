@@ -39,7 +39,7 @@ tasks.named('test') {
 }
 
 checkstyle {
-    toolVersion = "10.12.4"
+    toolVersion = "10.26.1"
 }
 
 tasks.withType(Checkstyle) {
