@@ -31,7 +31,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
 
-	spotbugs 'com.github.spotbugs:spotbugs:4.9.3'
+	spotbugs 'com.github.spotbugs:spotbugs:4.10.4'
 }
 
 tasks.named('test') {
